@@ -9,10 +9,14 @@ namespace MyChart
     public class BaseChart : IChart
     {
         public Dictionary<DateTime, float> Data;
+        public int Width { get; set; }
+        public int Height { get; set; }
 
-        public BaseChart()
+        public BaseChart(int width, int height)
         {
             Data = new Dictionary<DateTime, float>();
+            Width = width;
+            Height = height;
         }
 
         public virtual void GetData()

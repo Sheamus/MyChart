@@ -8,11 +8,12 @@ namespace MyChart
 {
     public class CalendarChart : BaseChart
     {
-        private int year;
+        public int Year { get; set; }
 
-        public CalendarChart(int Year) : base()
+        public CalendarChart(int year, int width, int height)
+            : base(width, height)
         {
-            year = Year;
+            Year = year;
         }
 
         public override void GetData()
@@ -26,26 +27,26 @@ namespace MyChart
             var min = (from r in Data select r.Value).Min();
 
             String[] months = new string[] { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
-            Bitmap b = new Bitmap(400, 300);
+            Bitmap b = new Bitmap(Width, Height);
             Graphics graphics = Graphics.FromImage(b);
             graphics.DrawImage(b, 0, 0);
 
-            int width = 90;
-            int height = 100;
+            int width = (int)(0.9 * Width / 4);
+            int height = Height / 3;
 
             for (int m = 0; m < 12; m++)
             {
                 int y = (m) / 4;
                 int x = m % 4;
-                Rectangle rect = new Rectangle(x * width, y * height, x + width - 5, y + height - 5);
+                Rectangle rect = new Rectangle(x * width, y * height, x + width - width / 20, y + height - height / 20);
                 graphics.FillRectangle(new SolidBrush(Color.FromArgb(m * 255 / 12, m * 255 / 12, m * 255 / 12)), rect);
 
                 Font drawFont = new Font("Arial", 8, FontStyle.Bold);
                 StringFormat drawFormat = new StringFormat();
                 //drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
 
-                int days = DateTime.DaysInMonth(year, m + 1);
-                DateTime firstDayOfMonth = new DateTime(year, m + 1, 1);
+                int days = DateTime.DaysInMonth(Year, m + 1);
+                DateTime firstDayOfMonth = new DateTime(Year, m + 1, 1);
                 var fdow = firstDayOfMonth.DayOfWeek;
                 int deltaD = 0;
                 switch (fdow)
@@ -61,7 +62,7 @@ namespace MyChart
 
                 for (int d = 0; d < days; d++)
                 {
-                    DateTime curDate = new DateTime(year, m + 1, d + 1);
+                    DateTime curDate = new DateTime(Year, m + 1, d + 1);
                     var dow = curDate.DayOfWeek;
                     var doy = curDate.DayOfYear;
                     var week = doy / 7;
@@ -71,15 +72,16 @@ namespace MyChart
                     if (val == null) continue;
 
                     int dd = d + deltaD;
-                    Color col = Color.FromArgb(d*255/days, 127, 0);
-                    
-                    if (dow == DayOfWeek.Saturday || dow == DayOfWeek.Sunday) col = Color.Red;
-                    
+                    double v = (val - min)/(max - min);
+                    if (v < 0) v = 0;
+                    int size = (int)(v * (0.10 * height)) + 1;
+                    Color col = Color.FromArgb((int)((1-v)*255), (int)((v)*128), 0);
                     Pen pen = new Pen(new SolidBrush(col));
+                    
+                    //if (dow == DayOfWeek.Saturday || dow == DayOfWeek.Sunday) col = Color.Red;
 
-                    int size = (int)((val - min)/(max - min)*10)+1;
-
-                    Rectangle ell = new Rectangle(x*width + dd/7*12, 12 + y*height + (dd%7)*12, size, size);
+                    Rectangle ell = new Rectangle((int) (0.2*width + x*width + (0.12*width)*(int) (dd/7)),
+                                                  (int)(0.12*height + y*height + (dd%7)*(0.12*height)), size, size);
                     graphics.FillEllipse(new SolidBrush(col), ell);
                 }
 

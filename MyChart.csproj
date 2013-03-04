@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseChart.cs" />
-    <Compile Include="MyChart.cs" />
+    <Compile Include="CalendarChart.cs" />
     <Compile Include="IChart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
