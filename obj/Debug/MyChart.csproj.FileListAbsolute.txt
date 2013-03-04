@@ -1,0 +1,10 @@
+C:\Users\baskov\Documents\Visual Studio 2010\Projects\MyChart\MyChart\obj\Debug\MyChart.csprojResolveAssemblyReference.cache
+C:\Users\baskov\Documents\Visual Studio 2010\Projects\MyChart\MyChart\bin\Debug\MyChart.dll
+C:\Users\baskov\Documents\Visual Studio 2010\Projects\MyChart\MyChart\bin\Debug\MyChart.pdb
+C:\Users\baskov\Documents\Visual Studio 2010\Projects\MyChart\MyChart\obj\Debug\MyChart.dll
+C:\Users\baskov\Documents\Visual Studio 2010\Projects\MyChart\MyChart\obj\Debug\MyChart.pdb
+Z:\Projects\MyChart\MyChart\bin\Debug\MyChart.dll
+Z:\Projects\MyChart\MyChart\bin\Debug\MyChart.pdb
+Z:\Projects\MyChart\MyChart\obj\Debug\MyChart.csprojResolveAssemblyReference.cache
+Z:\Projects\MyChart\MyChart\obj\Debug\MyChart.dll
+Z:\Projects\MyChart\MyChart\obj\Debug\MyChart.pdb
